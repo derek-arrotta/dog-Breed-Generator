@@ -22,20 +22,22 @@ function getDogImages(dogBreed) {
 // display results by setting "responseJson" variable to "response" url from above
 function displayResults(responseJson) {
     console.log(responseJson);
+    $('.results-img-1').addClass('hidden');
     //replace the existing image with the new one
         // replace placeholder images with dog images
-    if (responseJson.code == 404) {
-        $('.results-img-1').replaceWith(`<p>${responseJson.message}</p>`)
-    }
+    //if (responseJson.code == 404) {
+    //    $('.image-title').removeClass('hidden')
+    //    $('.results-img-1').replaceWith(`<img alt="${responseJson.message}">`)
+    //}
 
-    else {
+    //else {
         $('.results-img-1').replaceWith(
         `<img src="${responseJson.message}" class="results-img-1">`
         )
         //display the results section
         $('.image-title').removeClass('hidden')
         $('.results-img-1').removeClass('hidden');
-    }
+    //}
 }
 
 // when form is submitted ("generate dog pic(s)!" is pressed), run getDogImages function
