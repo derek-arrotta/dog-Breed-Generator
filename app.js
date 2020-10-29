@@ -15,29 +15,24 @@ function getDogImages(dogBreed) {
     // convert response to json for readable format
     // (promise method. response is a parameter (url). doesn't have to be called "response". just an argument of a function (this is a function =>))
         .then(response => response.json())
+        .then(responseJson => displayResults(responseJson))
     // if error happens, give alert message
         .catch(error => alert('Something went wrong. Try again later.'));
 }
 
 // display results by setting "responseJson" variable to "response" url from above
 function displayResults(responseJson) {
+    // print to console
     console.log(responseJson);
-    $('.results-img-1').addClass('hidden');
-    //replace the existing image with the new one
-        // replace placeholder images with dog images
-    //if (responseJson.code == 404) {
-    //    $('.image-title').removeClass('hidden')
-    //    $('.results-img-1').replaceWith(`<img alt="${responseJson.message}">`)
-    //}
-
-    //else {
-        $('.results-img-1').replaceWith(
-        `<img src="${responseJson.message}" class="results-img-1">`
+    // empty old results
+    $('.results').empty();
+        // show image in dom
+        $('.results').append(
+        `<img src="${responseJson.message}" class="results-img">`
         )
         //display the results section
         $('.image-title').removeClass('hidden')
-        $('.results-img-1').removeClass('hidden');
-    //}
+        $('.results').removeClass('hidden');
 }
 
 // when form is submitted ("generate dog pic(s)!" is pressed), run getDogImages function
@@ -48,10 +43,7 @@ function watchForm() {
         // get number of images entered by user
         const dogBreed = $('#dogBreed').val();
         // get dog images and display for user
-        getDogImages(dogBreed)
-            .then(response => {
-                displayResults(response);
-        });
+        getDogImages(dogBreed);
     });
 }
 
